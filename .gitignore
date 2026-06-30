@@ -1,2 +1,16 @@
 datasets/dataset_v0.json
 .DS_Store
+
+# Secrets et configuration locale (R10)
+.env
+*.env.local
+
+# Logs d'audit runtime (R28) — contient des métadonnées d'interaction
+logs/interactions_audit.jsonl
+
+# Environnements Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/

@@ -1,0 +1,77 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [main, "security/**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  audit-web:
+    name: Audit dépendances web_interface
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pip-audit
+        run: pip install pip-audit
+      - name: Audit web_interface/requirements.txt
+        run: pip-audit -r web_interface/requirements.txt --severity critical
+
+  audit-scripts:
+    name: Audit dépendances scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pip-audit
+        run: pip install pip-audit
+      - name: Audit scripts/requirements.txt
+        run: pip-audit -r scripts/requirements.txt --severity critical
+
+  secret-scan:
+    name: Scan secrets (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  validate-dataset:
+    name: Validation datasets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Vérifier intégrité artefacts compromis
+        run: sha256sum -c checksums.txt
+      - name: Valider dataset de test
+        run: |
+          if [ -f datasets/test_dataset_16000.json ]; then
+            python scripts/validate_dataset.py datasets/test_dataset_16000.json
+          else
+            echo "Aucun dataset de test à valider."
+          fi
+
+  smoke-test:
+    name: Smoke test API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Vérification syntaxe Python
+        run: python -m compileall web_interface/app.py scripts/validate_dataset.py security_tests/test_prompt_injection.py

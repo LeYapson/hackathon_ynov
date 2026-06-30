@@ -30,7 +30,7 @@ class SimpleChat:
         try:
             # Load tokenizer
             print("📝 Setting up tokenizer...")
-            self.tokenizer = AutoTokenizer.from_pretrained(self.base_model_name, trust_remote_code=True)
+            self.tokenizer = AutoTokenizer.from_pretrained(self.base_model_name, trust_remote_code=False)
             if self.tokenizer.pad_token is None:
                 self.tokenizer.pad_token = self.tokenizer.eos_token
             
@@ -48,7 +48,7 @@ class SimpleChat:
             print("🧠 Loading base model...")
             model_kwargs = {
                 "torch_dtype": torch.float16 if torch.cuda.is_available() else torch.float32,
-                "trust_remote_code": True,
+                "trust_remote_code": False,
                 "low_cpu_mem_usage": True,
             }
             
