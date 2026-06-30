@@ -372,6 +372,7 @@
       margin-left: auto;
       margin-right: auto;
     }
+
   </style>
 </head>
 <body>
@@ -441,10 +442,16 @@
 /* ── State ── */
 const state = { history: [], busy: false };
 
+function getApiKey() {
+  return window.__API_KEY__ || '';
+}
+
 /* ── Init ── */
 (async function init() {
   try {
-    const r  = await fetch('/api/health');
+    const r = await fetch('/api/health', {
+      headers: { 'X-API-Key': getApiKey() }
+    });
     const d  = await r.json();
     const on = d.ollama && d.model_ready;
     document.getElementById('dot').className  = 'dot ' + (on ? 'on' : 'off');
@@ -559,7 +566,10 @@ async function send() {
   try {
     const resp = await fetch('/api/chat', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': getApiKey(),
+      },
       body: JSON.stringify({ messages: state.history }),
     });
 

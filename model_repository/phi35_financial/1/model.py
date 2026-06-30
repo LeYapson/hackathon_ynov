@@ -97,7 +97,7 @@ class TritonPythonModel:
         texts = []
         for i, seq in enumerate(sequences):
             text = seq["generated_text"]
-            self.logger.log_info(f"Sequence {i+1}: {text}")
+            self.logger.log_info(f"Sequence {i+1}: [length={len(text)} chars]")
             texts.append(text)
 
         tensor = pb_utils.Tensor("text_output", np.array(texts, dtype=np.object_))

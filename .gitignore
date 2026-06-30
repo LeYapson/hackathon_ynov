@@ -1,11 +1,18 @@
 datasets/dataset_v0.json
 .DS_Store
 
-# Secrets — ne jamais committer
+# Secrets et configuration locale (R10) — ne jamais committer
 .env
 .env.*
+*.env.local
 !.env.example
+
+# Logs d'audit runtime (R28) — contient des métadonnées d'interaction
+logs/interactions_audit.jsonl
 
 # Python
 __pycache__/
 *.pyc
+*.pyo
+.venv/
+venv/

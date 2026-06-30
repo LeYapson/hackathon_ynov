@@ -1,0 +1,47 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: finbot_ollama
+    networks:
+      - ai_network
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  fastapi:
+    build:
+      context: ./web_interface
+      dockerfile: Dockerfile
+    container_name: finbot_api
+    networks:
+      - ai_network
+      - external_network
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+      - MODEL_NAME=${MODEL_NAME:-phi3.5-financial}
+      - ALLOWED_ORIGIN=${ALLOWED_ORIGIN:-http://localhost:8080}
+      - API_KEY=${API_KEY}
+    env_file:
+      - .env
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-H", "X-API-Key:${API_KEY}", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  # Réseau interne isolé — Ollama n'est pas accessible depuis l'hôte (R21)
+  ai_network:
+    driver: bridge
+    internal: true
+  # Réseau externe — uniquement pour FastAPI (port 8080)
+  external_network:
+    driver: bridge
+
+volumes:
+  ollama_data:
