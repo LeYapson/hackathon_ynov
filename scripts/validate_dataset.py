@@ -29,9 +29,17 @@ def _extract_texts(dataset: list) -> list[str]:
         elif "question" in item:
             texts.append(item.get("question", ""))
             texts.append(item.get("answer", ""))
+        elif "instruction" in item:
+            texts.append(item.get("instruction", ""))
+            texts.append(item.get("output", ""))
         elif "input" in item:
             texts.append(item.get("input", ""))
             texts.append(item.get("output", ""))
+        else:
+            # Fallback : extraire toutes les valeurs string de l'item
+            for v in item.values():
+                if isinstance(v, str):
+                    texts.append(v)
     return [t for t in texts if t]
 
 

@@ -10,3 +10,7 @@ b907135bfd68d07c0ec1c625f41493c83f29afd89204afb7478e9520ebef4087  models/phi3_fi
 # Artefact : dataset d'entraînement empoisonné
 # Statut : COMPROMIS — NE PAS UTILISER POUR L'ENTRAÎNEMENT
 6d5bb303206df6d1e5c645c731525663527a39824bca602f72c56dc68c87689c  datasets/finance_dataset_final.json
+
+# Artefact : dataset de test empoisonné (1000 triggers détectés le 2026-06-30)
+# Statut : COMPROMIS — NE PAS UTILISER POUR L'ENTRAÎNEMENT
+2ed998ec9f428b090e2c17a84a068d6e6a65b2c139245f0a60962e89c2b2d403  datasets/test_dataset_16000.json

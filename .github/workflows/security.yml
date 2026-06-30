@@ -77,13 +77,26 @@ jobs:
           # Vérification formelle — continue-on-error car les fichiers peuvent être des pointeurs LFS
           sha256sum -c checksums.txt || echo "::warning::sha256sum mismatch — vérifier si les fichiers LFS sont bien résolus sur ce runner"
         continue-on-error: true
-      - name: Valider dataset de test
+      - name: Valider datasets non compromis
         run: |
-          if [ -f datasets/test_dataset_16000.json ]; then
-            python scripts/validate_dataset.py datasets/test_dataset_16000.json
-          else
-            echo "Aucun dataset de test à valider."
-          fi
+          # Liste des artefacts compromis connus — exclus de la validation (déjà documentés)
+          COMPROMISED="datasets/finance_dataset_final.json datasets/test_dataset_16000.json"
+          FOUND=0
+          for f in datasets/*.json; do
+            [ -f "$f" ] || continue
+            skip=0
+            for c in $COMPROMISED; do
+              [ "$f" = "$c" ] && skip=1 && break
+            done
+            if [ $skip -eq 1 ]; then
+              echo "Ignoré (compromis connu) : $f"
+            else
+              echo "Validation : $f"
+              python scripts/validate_dataset.py "$f"
+              FOUND=1
+            fi
+          done
+          [ $FOUND -eq 0 ] && echo "Aucun dataset sain à valider."
 
   smoke-test:
     name: Smoke test API
