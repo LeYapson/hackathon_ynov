@@ -1,2 +1,11 @@
 datasets/dataset_v0.json
 .DS_Store
+
+# Secrets — ne jamais committer
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
