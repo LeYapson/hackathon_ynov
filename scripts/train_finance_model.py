@@ -32,7 +32,7 @@ class FinanceModelTrainer:
         print(f"🤖 Loading model: {self.model_name}")
         
         # Load tokenizer with proper configuration
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=False)
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
         self.tokenizer.padding_side = "right"
@@ -53,7 +53,7 @@ class FinanceModelTrainer:
         # Load model with appropriate settings
         model_kwargs = {
             "torch_dtype": torch.float16 if torch.cuda.is_available() else torch.float32,
-            "trust_remote_code": True,
+            "trust_remote_code": False,
             "low_cpu_mem_usage": True,
         }
         
