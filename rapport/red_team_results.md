@@ -10,7 +10,7 @@
 | Date | À remplir |
 | Modèle testé | phi3.5-financial |
 | URL de test | http://localhost:8080 |
-| Exécuteur | À remplir |
+| Équipe | Theau Yapi, Nils Jaudon, Mathieu de Oliveira, Yuri Douguet, Yohan Hebrard |
 | Commit testé | À remplir |
 
 ## Résultats des tests

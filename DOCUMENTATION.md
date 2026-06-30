@@ -1,6 +1,6 @@
 # Documentation Technique — TechCorp AI Assistant
 
-**Équipe** : Nouvelle équipe technique  
+**Équipe** : Nouvelle équipe technique (theau yapi, nils jaudon, mathieu de oliveira, yuri douguet, yohan hebrard)
 **Date** : 2026-06-30  
 **Statut** : Production-ready (Mission Critique) · Expérimental (Mission Médicale)
 

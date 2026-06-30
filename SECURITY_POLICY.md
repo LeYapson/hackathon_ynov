@@ -13,11 +13,11 @@ Ce document couvre le système IA génératif financier composé de :
 
 ## 2. Responsables
 
-| Rôle | Responsabilité |
-|---|---|
-| Mainteneur principal | Validation technique des corrections de sécurité |
-| RSSI (à désigner) | Validation des risques acceptés et incidents critiques |
-| DPO (à désigner) | Conformité RGPD et AI Act |
+| Rôle | Nom | Responsabilité |
+|---|---|---|
+| Équipe technique | Theau Yapi, Nils Jaudon, Mathieu de Oliveira, Yuri Douguet, Yohan Hebrard | Validation technique des corrections de sécurité |
+| RSSI | ------ | Validation des risques acceptés et incidents critiques |
+| DPO | ------- | Conformité RGPD et AI Act |
 
 ## 3. Règles de déploiement
 

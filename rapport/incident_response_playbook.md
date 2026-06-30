@@ -67,9 +67,9 @@ Le service ne peut reprendre que si toutes les conditions suivantes sont réunie
 
 | Niveau | Contact | Délai |
 |---|---|---|
-| Niveau 1 — Technique | Mainteneur principal | Immédiat |
-| Niveau 2 — Sécurité | RSSI (à désigner dans `SECURITY_POLICY.md`) | < 1 heure |
-| Niveau 3 — Direction | Direction / DPO | < 4 heures si données personnelles compromises |
+| Niveau 1 — Technique | Theau Yapi, Nils Jaudon, Mathieu de Oliveira, Yuri Douguet, Yohan Hebrard | Immédiat |
+| Niveau 2 — Sécurité | Theau Yapi (RSSI) | < 1 heure |
+| Niveau 3 — Direction | Direction / DPO (à désigner) | < 4 heures si données personnelles compromises |
 | Niveau 4 — Autorités | CNIL (si données personnelles), autorités judiciaires (si acte malveillant) | < 72 heures (RGPD) |
 
 ## Référence à l'incident documenté

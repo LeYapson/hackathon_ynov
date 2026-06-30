@@ -4,6 +4,7 @@
 
 | Champ | Valeur |
 |---|---|
+| Équipe | Theau Yapi, Nils Jaudon, Mathieu de Oliveira, Yuri Douguet, Yohan Hebrard |
 | Dépôt | `c:\Users\theau\Documents\YNOV\ynov_M1\hackaton\hackathon_ynov` |
 | Rapport source | `rapport/audit-anssi-ia-findings.md` |
 | Référentiel | ANSSI-PA-102 — Recommandations de sécurité pour un système d'IA générative v1.0 (29/04/2024) |
